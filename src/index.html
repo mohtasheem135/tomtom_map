@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps.css"
+    />
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/services/services-web.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="query" value="" >
+    <button onclick="search()">SEARCH</button>
+    <div style="width: 90vw; height: 90vh" id="mymap">Helo tomtom</div>
+
+    <script>
+      var APIKEY = "Your_API";
+      var Delhi = [77.1025, 28.7041];
+      var map = tt.map({
+        key: APIKEY,
+        container: "mymap",
+        center: Delhi,
+        zoom: 14,
+      });
+      var moveMap = function (lnglat) {
+        map.flyTo({
+          center: lnglat,
+          zoom: 14
+        })
+      }
+      var handleResults = function (result) {
+        console.log(result);
+        if (result.results) {
+          moveMap(result.results[0].position)
+        }
+      }
+
+      var search = function () {
+
+        //   console.log(12);
+        // tt.services.fuzzySearch({
+        //     key: APIKEY,
+        //     query: document.getElementById("query").value,
+        //   })
+        //   .go()
+        //   .then(handleResults)
+        function callbackFn(result) {
+  console.log(result);
+  if (result.results) {
+          moveMap(result.results[0].position)
+        }
+};
+
+tt.services.fuzzySearch({
+  key: APIKEY,
+//   query: 'Amsterdam'
+  query: document.getElementById("query").value
+}).then(callbackFn);
+      }
+    </script>
+  </body>
+</html>

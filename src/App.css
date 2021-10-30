@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+.map{
+  height: 100vh;
+}
+
+.cord{
+  display: inline-block;
+  padding: 12px 22px;
+  
+}
+
+.cord-1{
+  padding: 12px 22px;
+  border-right: 2px solid black;
+}
