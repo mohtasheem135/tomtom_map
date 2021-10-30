@@ -22,6 +22,7 @@ function App() {
   const [trafficDelay, setTrafficDellay] = useState("")
   const mapElement = useRef()
   const [map, setMap] = useState({});
+  const [geoJson, setGeoJson] = useState("");
   // var ll = new tt.LngLat(lon_2, lat_2);
   var ll = new tt.LngLat(4.8, 52.3);
 
@@ -61,10 +62,45 @@ function App() {
               center: ll,
               pitch: 25,
             })
+            
             map.flyTo({
               center: [resp.results[0].position.lon, resp.results[0].position.lat],
-
             })
+            // map.addLayer({
+            //   id: 'route',
+            //   type: 'line',
+            //   source: {
+            //     type: 'geoJson',
+            //     data: GeoJSON
+            //   },
+            //   paint: {
+            //     'line-color': '#4a90e2',
+            //     'line-width': 6
+          
+            //   }
+            // })
+
+            // const drawRoute = (GeoJSON, map) => {
+            //   if (map.getLayer('route')) {
+            //     map.removeLayer('route')
+            //     map.removeSource('route')
+            //   }
+            //   map.addLayer({
+            //     id: 'route',
+            //     type: 'line',
+            //     source: {
+            //       type: 'geoJson',
+            //       data: GeoJSON
+            //     },
+            //     paint: {
+            //       'line-color': '#4a90e2',
+            //       'line-width': 6
+            
+            //     }
+            //   })
+            // }
+
+
 
             var marker_1 = new tt.Marker()
               .setLngLat([resp.results[0].position.lon, resp.results[0].position.lat])
@@ -74,49 +110,38 @@ function App() {
             var marker_2 = new tt.Marker()
               .setLngLat([res.results[0].position.lon, res.results[0].position.lat])
               .addTo(map);
-
-
-            // map.isMoving({
-            //   Boolean: true,
-            // })
-            // map.jumpTo({
-            //   center: [resp.results[0].position.lon, resp.results[0].position.lat],
-            // })
-            // fetch(`https://api.tomtom.com/routing/1/calculateRoute/${lat_1},${lon_1}:${lat_2},${lon_2}/json?key=xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D`).then((result) => {
-            //   result.json().then((resl) => {
-            //     // setCity(resp);
-            //     console.log("Total Length : "+resl.routes[0].summary.lengthInMeters);
-            //     console.log("Total traffic Delay : "+resl.routes[0].summary.trafficDelayInSeconds);
-            //     console.log("Total Time : "+resl.routes[0].travelTimeInSeconds);
-
-            //   })
-            // })
           })
         })
       })
     })
   }
 
-  function getMap(e) {
-    e.preventDefault();
-    let map = tt.map({
+  // function getMap(e) {
+  //   e.preventDefault();
+  //   let map = tt.map({
 
-      key: "xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D",
-      container: mapElement.current,
-      style: {
-        map: 'basic_main',
-        trafficIncidents: 'incidents_day',
-      },
-      zoom: 13,
-      center: ll,
-      pitch: 25,
-    })
-    map.flyTo({
-      center: [lon_1, lat_1],
-
-    })
-
-  }
+  //     key: "xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D",
+  //     container: mapElement.current,
+  //     style: {
+  //       map: 'basic_main',
+  //       trafficIncidents: 'incidents_day',
+  //     },
+  //     zoom: 13,
+  //     center: ll,
+  //     pitch: 25,
+  //   })
+  //   map.flyTo({
+  //     center: [lon_1, lat_1],
+  //   })
+  //   map.addLayer({
+  //     id: 'route',
+  //     type: 'line',
+  //     paint: {
+  //       'line-color': '#4a90e2',
+  //       'line-width': 6
+  //     }
+  //   })
+  // }
 
   // var lat1 = String(lat_1)
   // var lon1 = String(lon_1)
@@ -146,28 +171,13 @@ function App() {
   //   traffic: true
   // }).then(callbackFn);
 
-  function getRoute(e) {
-    fetch(`https://api.tomtom.com/routing/1/calculateRoute/${lat_1},${lon_1}:${lat_2},${lon_2}/json?key=xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D`).then((result) => {
-      result.json().then((resl) => {
-        // setCity(resp);
-        console.log(resl.routes[0].summary);
-        // console.log("Total Length : " + resl.routes[0].summary.lengthInMeters/1000 + "KM");
-        // console.log("Total traffic Delay : " + resl.routes[0].summary.trafficDelayInSeconds/60 + "minutes");
-        // console.log("Total Time : " + resl.routes[0].summary.travelTimeInSeconds/3600 +"hour");
-        setTotalDistance(resl.routes[0].summary.lengthInMeters / 1000);
-        setTotalTime(resl.routes[0].summary.travelTimeInSeconds / 3600);
-        setTrafficDellay(resl.routes[0].summary.trafficDelayInSeconds / 60);
-      })
-    })
-  }
-
-  const drawRoutes = (geoJson,map) => {
-    if(map.getLayer('route')) {
+  const drawRoute = (geoJson, map) => {
+    if (map.getLayer('route')) {
       map.removeLayer('route')
       map.removeSource('route')
     }
     map.addLayer({
-      id:'route',
+      id: 'route',
       type: 'line',
       source: {
         type: 'geojson',
@@ -176,31 +186,90 @@ function App() {
       paint: {
         'line-color': '#4a90e2',
         'line-width': 6
+  
       }
     })
   }
 
-  const handelOnSubmit =()=>{
-    if(resl){
-      getRoute();
-      drawRoutes();
-    }
+  function getRoute(e) {
+    fetch(`https://api.tomtom.com/routing/1/calculateRoute/${lat_1},${lon_1}:${lat_2},${lon_2}/json?key=xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D`).then((result) => {
+      result.json().then((resl) => {
+        // setCity(resp);
+        console.log(resl);
+        // console.log("Total Length : " + resl.routes[0].summary.lengthInMeters/1000 + "KM");
+        // console.log("Total traffic Delay : " + resl.routes[0].summary.trafficDelayInSeconds/60 + "minutes");
+        // console.log("Total Time : " + resl.routes[0].summary.travelTimeInSeconds/3600 +"hour");
+        console.log(resl.routes[0].legs[0].points);
+        setGeoJson(resl.routes[0].legs[0].points);
+        setTotalDistance(resl.routes[0].summary.lengthInMeters / 1000);
+        setTotalTime(resl.routes[0].summary.travelTimeInSeconds / 3600);
+        setTrafficDellay(resl.routes[0].summary.trafficDelayInSeconds / 60);
+      })
+    })
+   
   }
+
+  // const drawRoutes = (geoJson,map) => {
+  //   if(map.getLayer('route')) {
+  //     map.removeLayer('route')
+  //     map.removeSource('route')
+  //   }
+  //   map.addLayer({
+  //     id:'route',
+  //     type: 'line',
+  //     source: {
+  //       type: 'geojson',
+  //       data: geoJson
+  //     },
+  //     paint: {
+  //       'line-color': '#4a90e2',
+  //       'line-width': 6
+  //     }
+  //   })
+  // }
+
+  // const handelOnSubmit =()=>{
+  //   if(resl){
+  //     getRoute();
+  //     drawRoutes();
+  //   }
+  // // }
+
+  // var origins = [
+  //   { point: { latitude: 21.63228, longitude: 85.89566 } },
+  //   { point: { latitude: 21.63228, longitude: 85.89566 } }
+  // ];
+  // var destinations = [
+  //   { point: { latitude: 23.3699, longitude: 85.32528 } },
+  //   { point: { latitude: 23.3699, longitude: 85.32528 } }
+  // ];
+  // function callbackFn(routeGeoJson) {
+  //   console.log(routeGeoJson);
+  // }
+  // ttapi.services.matrixRouting({
+  //   key: "xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D",
+  //   origins: origins,
+  //   destinations: destinations,
+  //   traffic: true
+  // }).then(callbackFn);
+  
 
 
   return (
 
 
 
-    <div className="App">
+    <div className="Apppp">
       <div >
         <div className="App" ref={mapElement}></div>
       </div>
-      <h1>Hello</h1>
-      <input type="text" placeholder="origin" value={city_1} onChange={(e) => { setCity_1(e.target.value) }} />
-      <input type="text" placeholder="destination" value={city_2} onChange={(e) => { setCity_2(e.target.value) }} />
-      <button onClick={getMap} onClick={getData}>CLICK</button>
-      <button onClick={getRoute}>GET ROUTE</button>
+     <div className="container">
+     <h1 className="head">Enter Here...</h1>
+      <input  className="input" type="text" placeholder="origin" value={city_1} onChange={(e) => { setCity_1(e.target.value) }} />
+      <input className="input" type="text" placeholder="destination" value={city_2} onChange={(e) => { setCity_2(e.target.value) }} />
+      <button className="btn" onClick={getData}>CLICK</button>
+      <button className="btn" onClick={getRoute}>GET ROUTE</button>
+      <button className="btn" onClick={drawRoute}>Draw Route</button>
       <br />
       <div className="cord cord-1">
         <h3>Latitude : {lat_1}</h3>
@@ -216,10 +285,10 @@ function App() {
         <h3>Total Time (in s) : {totalTime} hr</h3>
         <h3>Total traffic delay (in s) : {trafficDelay} sec</h3>
       </div>
-      <hr /><hr />
-      <div >
+     </div>
+      {/* <div >
         <div className="map" ref={mapElement}></div>
-      </div>
+      </div> */}
 
 
     </div>
