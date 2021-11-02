@@ -1,3 +1,5 @@
+
+
 .App {
   text-align: center;
   display: block;
@@ -55,5 +57,20 @@
 
 }
 
-.cord-1{
+
+
+.button{
+  color: red;
+}
+
+.mapboxgl-ctrl button:not(:disabled){
+  width: 5%;
+  height: 1pc;
+  cursor: pointer;
+}
+
+.mapboxgl-ctrl button:not(:disabled):hover{
+  width: 5%;
+  height: 1pc;
+  color: black;
 }
