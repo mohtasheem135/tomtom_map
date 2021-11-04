@@ -5,8 +5,17 @@ import * as tt from '@tomtom-international/web-sdk-maps'
 import * as ttapi from '@tomtom-international/web-sdk-services'
 import { render } from '@testing-library/react'
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
+import '@tomtom-international/web-sdk-plugin-zoomcontrols/dist/ZoomControls.css';
+import '@tomtom-international/web-sdk-plugin-pancontrols/dist/PanControls.css';
+import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
 import ZoomControls from '@tomtom-international/web-sdk-plugin-zoomcontrols';
 import PanControls from '@tomtom-international/web-sdk-plugin-pancontrols';
+import { services } from '@tomtom-international/web-sdk-services';
+import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
+import { plugins } from 'pretty-format';
+
+
+
 
 function App() {
 
@@ -18,39 +27,16 @@ function App() {
   const [lon_2, setLongitude_2] = useState("");
   const [city_1, setCity_1] = useState("");
   const [city_2, setCity_2] = useState("");
-  const [totalTime, setTotalTime] = useState("");
-  const [totalDistance, setTotalDistance] = useState("");
-  const [trafficDelay, setTrafficDellay] = useState("");
-  const [cost, setCost] = useState("");
-  const mapElement = useRef()
+  const [totalTime, setTotalTime] = useState("0");
+  const [totalDistance, setTotalDistance] = useState("0");
+  const [trafficDelay, setTrafficDellay] = useState("0");
+  const [cost, setCost] = useState("0");
+  const mapElement = useRef();
+  const searchElement = useRef();
   const [map, setMap] = useState({});
   // var ll = new tt.LngLat(lon_2, lat_2);
   var ll = new tt.LngLat(85.32528, 23.3699);
 
-
-  useEffect(() => {
-    // const ttZoomControls = new ZoomControls({
-    //   className: 'my-class-name', // default = ''
-    //   animate: false // default = true
-    // });
-    let map = tt.map({
-      key: "xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D",
-      container: mapElement.current,
-      center: ll,
-      zoom: 14
-    });
-    setMap(map);
-    return () => map.remove();
-  }, []);
-
-  // map.touchZoomRotate.enable();
-
-  // map.addControl(ttZoomControls, 'top-left');
-
-
-  // map.flyTo({
-  //   center: [resp.results[0].position.lon, resp.results[0].position.lat],
-  // })
 
 
 
@@ -79,6 +65,10 @@ function App() {
         })
       })
     })
+    setTotalDistance(0);
+    setTotalTime(0);
+    setTrafficDellay(0);
+    setCost(0);
   }
 
 
@@ -111,7 +101,7 @@ function App() {
     })
 
     map.addControl(ttZoomControls, 'top-left');
-    map.addControl(ttPanControls, 'top-left');
+    map.addControl(ttPanControls, 'bottom-right');
 
     var marker_1 = new tt.Marker()
       .setLngLat([lon_1, lat_1])
@@ -122,6 +112,10 @@ function App() {
     var marker_2 = new tt.Marker()
       .setLngLat([lon_2, lat_2])
       .addTo(map);
+
+
+
+
 
     ttapi.services.calculateRoute({
       key: 'xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D',
@@ -162,27 +156,26 @@ function App() {
         setCost(((resl.routes[0].summary.lengthInMeters * 40) / 1000).toFixed(2));
       })
     })
-
-
-
   }
 
+
+
   return (
-
-
-
     <div className="Apppp">
       <div >
+        <div id="searchboxHTML"></div>
         <div className="App" ref={mapElement}></div>
       </div>
       <div className="container">
-        <h1 className="head">Enter Here...</h1>
+        {/* <h1 className="head">Enter Here...</h1> */}
         <input className="input" type="text" placeholder="Origin" value={city_1} onChange={(e) => { setCity_1(e.target.value) }} />
         <input className="input" type="text" placeholder="Destination" value={city_2} onChange={(e) => { setCity_2(e.target.value) }} />
-        <button className="btn" onClick={getData}>CLICK</button>
-        <button className="btn" onClick={route}>ROUTE</button>
+        <div className="btn-container">
+          <button className="btn btn-1" onClick={getData}>CLICK</button>
+          <button className="btn btn-2" onClick={route} >ROUTE</button>
+        </div>
         <br />
-        <div className="cord cord-1">
+        {/* <div className="cord cord-1">
           <h3>Latitude : {lat_1}</h3>
           <h3>Longitude : {lon_1}</h3>
 
@@ -190,12 +183,19 @@ function App() {
         <div className="cord cord-1">
           <h3>Latitude : {lat_2}</h3>
           <h3>Longitude : {lon_2}</h3>
-        </div>
+        </div> */}
         <div className="cord">
-          <h2>Total Fare Charge -: ₹{cost}</h2>
-          <h3>Total Distance -: {totalDistance} KM</h3>
-          <h3>Total Time -: {totalTime} hr</h3>
-          <h3>Total traffic delay (in s) : {trafficDelay} sec</h3>
+          {
+            cost == 0 ? "" : <h2>Total Fare Charge -: ₹{cost}</h2>
+
+          }
+          {
+            totalDistance == 0 ? "" : <h3>Total Distance -: {totalDistance} KM</h3>
+          }
+          {
+            totalTime == 0 ? "" : <h3>Total Time -: {totalTime} hr</h3>
+          }
+          {/* <h3>Total traffic delay (in s) : {trafficDelay} sec</h3> */}
         </div>
       </div>
 
