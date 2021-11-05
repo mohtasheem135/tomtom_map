@@ -21,7 +21,8 @@
 
 
 .cord{
-  /* border: 2px solid green; */
+  /* border: 2px solid green;
+  background-color: grey; */
   width: 70%;
   margin-top: 23px;
   margin-left: 44px;
@@ -56,11 +57,19 @@
   outline: none;
   background: none;
   padding: 5px 8px;
-  border-radius: 3px;
+  
   border-bottom: 3px solid rgb(89, 154, 214);
   border: 0.5px solid rgb(102, 102, 102);
   box-shadow: 0px 1px 2px gray;
   text-shadow: 0 1px 2px black;
+}
+
+.btn-1{
+  border-radius: 6px 0px 0px 6px;
+}
+
+.btn-2{
+  border-radius: 0px 6px 6px 0px;
 }
 
 .btn:hover{
@@ -124,6 +133,7 @@
 
   .cord{
     margin-top: 120%;
+    width: 100%;
   }
 }
 
@@ -266,7 +276,7 @@
   .cord{
    
     height: 7pc;
-    margin-top: 125%;
+    margin-top: 134%;
   }
 }
 
@@ -293,7 +303,7 @@
     margin-top: -190%;
   }
   .cord{
-    margin-top: 130%;
+    margin-top: 139%;
   }
 }
 
@@ -306,7 +316,7 @@
     margin-top: -195%;
   }
   .cord{
-    margin-top: 133%;
+    margin-top: 141%;
   }
 }
 
@@ -319,7 +329,7 @@
     margin-top: -200%;
   }
   .cord{
-    margin-top: 136%;
+    margin-top: 146%;
   }
 }
 
@@ -332,7 +342,7 @@
     margin-top: -207%;
   }
   .cord{
-    margin-top: 141%;
+    margin-top: 151%;
   }
 }
 
@@ -347,7 +357,7 @@
     margin-top: -213%;
   }
   .cord{
-    margin-top: 145%;
+    margin-top: 155%;
   }
 }
 
@@ -360,6 +370,6 @@
     margin-top: -220%;
   }
   .cord{
-    margin-top: 148%;
+    margin-top: 160%;
   }
 }

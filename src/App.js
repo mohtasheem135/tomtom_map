@@ -32,10 +32,56 @@ function App() {
   const [trafficDelay, setTrafficDellay] = useState("0");
   const [cost, setCost] = useState("0");
   const mapElement = useRef();
-  const searchElement = useRef();
   const [map, setMap] = useState({});
+  const [add_1, setAdd_1] = useState("");
+  const [add_2, setAdd_2] = useState("");
   // var ll = new tt.LngLat(lon_2, lat_2);
   var ll = new tt.LngLat(85.32528, 23.3699);
+
+
+  useEffect(() => {
+    // const ttZoomControls = new ZoomControls({
+    //   className: 'my-class-name', // default = ''
+    //   animate: true // deafult = true
+    // });
+    // const ttPanControls = new PanControls({
+    //   className: 'my-class-name', // default = ''
+    //   panOffset: 150 // default = 100
+    // });
+
+    let map = tt.map({
+      key: "xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D",
+      container: mapElement.current,
+      style: {
+        map: 'basic_main',
+        trafficIncidents: 'incidents_s0',
+        traffic_flow: 'low_relative-delay'
+      },
+      center: [85.32528, 23.3699],
+      zoom: 14,
+    });
+    map.addControl(new tt.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: false
+      },
+      trackUserLocation: true
+    }));
+
+    // map.addControl(ttZoomControls, 'top-left');
+    // map.addControl(ttPanControls, 'bottom-right');
+    var nav = new tt.NavigationControl({
+      showExtendedRotationControls: true,
+      showPitch: true,
+      showExtendedPitchControls: true
+    });
+    map.addControl(nav, 'top-left');
+
+    setMap(map);
+    return () => map.remove();
+
+  }, []);
+
+
 
 
 
@@ -47,9 +93,10 @@ function App() {
     fetch(`https://api.tomtom.com/search/2/search/${city_1}.json?key=xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D&lat=37.8085&lon=-122.4239`).then((result) => {
       result.json().then((resp) => {
         // setCity_1(resp);
-        console.log(resp.results[0].position);
-        setLatitude_1(resp.results[0].position.lat)
-        setLongitude_1(resp.results[0].position.lon)
+        console.log(resp.results[0].address.freeformAddress);
+        setLatitude_1(resp.results[0].position.lat);
+        setLongitude_1(resp.results[0].position.lon);
+        setAdd_1(resp.results[0].address.freeformAddress);
 
 
         setValue_2("");
@@ -57,9 +104,10 @@ function App() {
         fetch(`https://api.tomtom.com/search/2/search/${city_2}.json?key=xmGDg3yi0bPcCsg8sb6hIuKqGglCZw4D&lat=37.8085&lon=-122.4239`).then((result) => {
           result.json().then((res) => {
             // setCity(resp);
-            console.log(res.results[0].position);
-            setLatitude_2(res.results[0].position.lat)
-            setLongitude_2(res.results[0].position.lon)
+            console.log(res.results[0].address.freeformAddress);
+            setLatitude_2(res.results[0].position.lat);
+            setLongitude_2(res.results[0].position.lon);
+            setAdd_2(res.results[0].address.freeformAddress);
 
           })
         })
@@ -74,14 +122,14 @@ function App() {
 
   function route() {
 
-    const ttZoomControls = new ZoomControls({
-      className: 'my-class-name', // default = ''
-      animate: true // deafult = true
-    });
-    const ttPanControls = new PanControls({
-      className: 'my-class-name', // default = ''
-      panOffset: 150 // default = 100
-    });
+    // const ttZoomControls = new ZoomControls({
+    //   className: 'my-class-name', // default = ''
+    //   animate: true // deafult = true
+    // });
+    // const ttPanControls = new PanControls({
+    //   className: 'my-class-name', // default = ''
+    //   panOffset: 150 // default = 100
+    // });
 
     let map = tt.map({
 
@@ -99,21 +147,44 @@ function App() {
     map.flyTo({
       center: [lon_1, lat_1],
     })
+    map.addControl(new tt.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: false
+      },
+      trackUserLocation: true
+    }));
+    var nav = new tt.NavigationControl({
+      showExtendedRotationControls: true,
+      showPitch: true,
+      showExtendedPitchControls: true
+    });
+    map.addControl(nav, 'top-left');
 
-    map.addControl(ttZoomControls, 'top-left');
-    map.addControl(ttPanControls, 'bottom-right');
+    // map.addControl(ttZoomControls, 'top-left');
+    // map.addControl(ttPanControls, 'bottom-right');
 
     var marker_1 = new tt.Marker()
       .setLngLat([lon_1, lat_1])
       .addTo(map);
 
+    var popupOffsets = {
+      top: [0, 0],
+      bottom: [0, -70],
+      'bottom-right': [0, -70],
+      'bottom-left': [0, -70],
+      left: [25, -35],
+      right: [-25, -35]
+    }
 
+    var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`Patient : ${add_1}`);
+    marker_1.setPopup(popup).togglePopup();
 
     var marker_2 = new tt.Marker()
       .setLngLat([lon_2, lat_2])
       .addTo(map);
 
-
+    var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`Destination : ${add_2}`);
+    marker_2.setPopup(popup).togglePopup();
 
 
 
