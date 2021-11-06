@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=Libre+Baskerville&family=Lobster&display=swap');
+
+
+body{
+    height: 100vh;
+    /* background-image: linear-gradient(rgb(123, 187, 98), rgb(255, 202, 103)); */
+    padding: 0;
+    margin: 0;
+    /* border: 2px solid black; */
+}
+
+.btn-1{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+.menu-container{
+    margin-top: 32px;
+    height: 4pc;
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    
+}
+
+.head-nav{
+}
+
+.head-nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 65pc;
+}
+
+.head-nav ul li{
+    /* border: 2px solid white; */
+    list-style: none;
+    margin-right: 35px;
+    font-size: 26px;
+    
+}
+
+.head-nav ul li:hover{
+    cursor: pointer;
+    
+}
+
+.head-nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+.head-nav ul li a:hover{
+    
+    color: #4d79ff;
+    text-decoration: underline #0039e6;
+}
+
+.img{
+    margin-left: 52%;
+    position: absolute;
+    margin-top: 7%;
+}
+
+.text{
+    margin-left: 22px;
+    padding: 0px 18px;
+}
+
+.text-1{
+    display: block;
+    /* border: 2px solid red; */
+    margin-top: 45px;
+    font-size: 42px;
+    font-family: 'Lobster', cursive;
+    text-shadow: 5px -5px 4px rgb(134, 134, 134);
+}
+
+.text-2{
+    display: flex;
+    margin-top: 45px;
+    /* border: 2px solid rgb(255, 255, 255); */
+    font-size: 26px;
+    font-family: 'Libre Baskerville', serif;
+    text-shadow: 0px 2px 3px black;
+}
+
+
+
+.rapid-btn{
+
+  margin-top: 3%;
+  margin-left: 8%;
+  font-size: 24px;
+  height: 3pc;
+  width: 16%;
+  color: white;
+  background-color: #4d79ff;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 3px 2px 4px rgb(0, 0, 0);
+  text-shadow: 3px 3px 4px rgb(0, 0, 0);
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.rapid-btn:hover{
+  
+  cursor: pointer;
+  height: 4pc;
+  background-color: #ec4b22;
+  transition: all 0.2s ;
+  
+}
+
+
+
+.foot-nav{
+    /* border: 2px solid white; */
+    margin-top: 12%;
+}
+
+.foot-nav ul{
+    display: flex;
+    list-style: none;
+}
+
+.foot-nav ul li{
+    /* border: 2px solid red;
+    background-color: white; */
+    font-size: 26px;
+    margin-left: 52px;
+    
+}
+
+.foot-nav ul li a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    transition: all 0.2s;
+}
+
+.foot-nav ul li a:hover{
+    color: rgb(23, 3, 204);
+    /* text-decoration: underline; */
+    border-bottom: 3px solid rgb(23, 3, 204);
+    
+}
+
+
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+    height: 100%;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  }
+  
+  /* Position the content inside the overlay */
+  .overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+  }
+  
+  /* The navigation links inside the overlay */
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  /* Position the close button (top right corner) */
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+
+  
+
+  @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+}
+.show-btn{
+  background: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #3498db;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.show-btn, .container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+input[type="checkbox"]{
+  display: none;
+}
+.container{
+  display: none;
+  background: #fff;
+  width: 410px;
+  padding: 30px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+#show:checked ~ .container{
+  display: block;
+}
+.container .close-btn{
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.container .close-btn:hover{
+  color: #3498db;
+}
+.container .text{
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+}
+.container form{
+  margin-top: -20px;
+}
+.container form .data{
+  height: 45px;
+  width: 100%;
+  margin: 40px 0;
+}
+form .data label{
+  font-size: 18px;
+}
+form .data input{
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  border: 1px solid silver;
+}
+form .data input:focus{
+  border-color: #3498db;
+  border-bottom-width: 2px;
+}
+form .forgot-pass{
+  margin-top: -8px;
+}
+form .forgot-pass a{
+  color: #3498db;
+  text-decoration: none;
+}
+form .forgot-pass a:hover{
+  text-decoration: underline;
+}
+form .btn{
+  margin: 30px 0;
+  height: 45px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+form .btn .inner{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  z-index: -1;
+  background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+  transition: all 0.4s;
+}
+form .btn:hover .inner{
+  left: 0;
+}
+form .btn button{
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+form .signup-link{
+  text-align: center;
+}
+form .signup-link a{
+  color: #3498db;
+  text-decoration: none;
+}
+form .signup-link a:hover{
+  text-decoration: underline;
+
+}
+
+
+.btn-solid-lg {
+	display: inline-block;
+  color: #fff;
+	padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+	border: 1px solid #c2337b;
+	border-radius: 32px;
+	background-color: #c2337b;
+	
+	font-weight: 600;
+	font-size: 1.3rem;
+	line-height: 0;
+	text-decoration: none;
+	transition: all 0.2s;
+  margin-left: 4%;
+}
+.btn-solid-lg-col{
+  color:white;
+  text-decoration: none
+}
+.btn-solid-lg:hover {
+	background-color: transparent;
+	color: #c2337b; /* needs to stay here because of the color property of a tag */
+	text-decoration: none;
+}

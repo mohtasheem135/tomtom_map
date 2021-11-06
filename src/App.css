@@ -9,7 +9,6 @@
   box-shadow: 2px 4px 4px rgb(105, 105, 105);
   height: 33pc;
   width: 60%;
-  
 }
 
 .container{
@@ -372,4 +371,105 @@
   .cord{
     margin-top: 160%;
   }
+}
+
+
+.payment-btn{
+  padding: 12px 12px;
+  font-size: 19px;
+  margin-top: -19%;
+  margin-left: 65%;
+  position: absolute;
+  background: none;
+  border-radius: 8px ;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-btn:hover{
+  cursor: pointer;
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.payment-btn-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 12%;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.payment-btn-cancel{
+  
+  background: none;
+  outline: none;
+ /* border: 2px solid black; */
+ background-color: #0080ff;
+ color: white;
+ width: 90%;
+  padding: 10px 23px;
+  border-radius: 3px;
+  outline: none;
+  font-size: 22px;
+  z-index: 5;
+  text-shadow: 2px 1px 4px rgb(0, 0, 0);
+  /* box-shadow: 2px 1px 4px black; */
+  
+}
+
+.payment-btn-cancel:hover{
+  color: rgb(0, 0, 0);
+  background-color: #1a8cff;
+  box-shadow: 2px 1px 4px black;
+  cursor: pointer;
+}
+
+.payment-btn-confirm{
+  /* margin-top: 12%;
+    position: absolute; */
+}
+
+
+.container-1{
+  height: 100vh;
+  width: 100%;
+  border: 2px solid black;
+  background-color: rgba(77, 77, 77, 0.7);
+  
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-top: -52.5%;
+  
+}
+
+.container-2{
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  height: 30pc;
+  margin-top: 5%;
+  width: 35%;
+  box-shadow: 3px 1px 5px rgb(0, 0, 0);
+}
+
+.Radio-btn{
+  /* border: 2px solid rgb(230, 11, 11); */
+}
+
+.Radio-input{
+  /* border: 2px solid red; */
+  margin-top: 42px;
+  margin-left: 80px;
+
+}
+
+.Radio-label{
+  /* border: 2px solid red; */
+  font-size: 22px;
 }
