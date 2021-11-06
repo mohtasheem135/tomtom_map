@@ -5,14 +5,15 @@ import * as tt from '@tomtom-international/web-sdk-maps'
 import * as ttapi from '@tomtom-international/web-sdk-services'
 import { render } from '@testing-library/react'
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
-import '@tomtom-international/web-sdk-plugin-zoomcontrols/dist/ZoomControls.css';
-import '@tomtom-international/web-sdk-plugin-pancontrols/dist/PanControls.css';
-import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
-import ZoomControls from '@tomtom-international/web-sdk-plugin-zoomcontrols';
-import PanControls from '@tomtom-international/web-sdk-plugin-pancontrols';
-import { services } from '@tomtom-international/web-sdk-services';
-import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
-import { plugins } from 'pretty-format';
+// import '@tomtom-international/web-sdk-plugin-zoomcontrols/dist/ZoomControls.css';
+// import '@tomtom-international/web-sdk-plugin-pancontrols/dist/PanControls.css';
+// import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
+// import ZoomControls from '@tomtom-international/web-sdk-plugin-zoomcontrols';
+// import PanControls from '@tomtom-international/web-sdk-plugin-pancontrols';
+// import { services } from '@tomtom-international/web-sdk-services';
+
+// import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
+// import { plugins } from 'pretty-format';
 
 
 
@@ -117,7 +118,9 @@ function App() {
     setTotalTime(0);
     setTrafficDellay(0);
     setCost(0);
+    alert("Address added")
   }
+
 
 
   function route() {
@@ -227,7 +230,44 @@ function App() {
         setCost(((resl.routes[0].summary.lengthInMeters * 40) / 1000).toFixed(2));
       })
     })
+    function popup_cancel() {
+      window.location.reload()
+    }
+    function popup_123() {
+      // window.location.reload()
+      render(
+        <div className="container-1">
+          <div className="container-2">
+            <div className="Radio-btn">
+              <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+              <label className="Radio-label" for="html">Pay Using Debit Card</label><br />
+              <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+              <label className="Radio-label" for="html">Pay via Online Banking</label><br />
+              <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+              <label className="Radio-label" for="html">Pay using UPI</label><br />
+              <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+              <label className="Radio-label" for="html">Pay directly to the Ambulance Driver</label><br />
+            </div>
+            <div className="payment-btn-container">
+              <button className="payment-btn-cancel payment-btn-confirm" >Payment Confirmed</button>
+              <button onClick={popup_cancel} className="payment-btn-cancel" >Cancel</button>
+
+            </div>
+
+          </div>
+        </div>
+      )
+    }
+    render(
+      <div className="payment-btn-container">
+
+        <button className="payment-btn" onClick={popup_123} >Pay Now</button>
+        {/* <button onClick={popup_cancel} className="payment-btn-cancel payment-btn-confirm" >Confirm</button> */}
+      </div>
+    )
   }
+
+
 
 
 
@@ -269,8 +309,30 @@ function App() {
           {/* <h3>Total traffic delay (in s) : {trafficDelay} sec</h3> */}
         </div>
       </div>
+      {/* <Pop /> */}
+      {/* render(
+      <div className="container-1">
+        <div className="container-2">
+          <div className="Radio-btn">
+            <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+            <label className="Radio-label" for="html">Pay Using Debit Card</label><br />
+            <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+            <label className="Radio-label" for="html">Pay via Online Banking</label><br />
+            <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+            <label className="Radio-label" for="html">Pay using UPI</label><br />
+            <input className="Radio-input" type="radio" id="html" name="fav_language" value="HTML" />
+            <label className="Radio-label" for="html">Pay directly to the Ambulance Driver</label><br />
+          </div>
+          <div className="payment-btn-container">
+          <button className="payment-btn-cancel payment-btn-confirm" >Payment Confirmed</button>
+            <button className="payment-btn-cancel" >Cancel</button>
+            
+          </div>
 
-
+        </div>
+      </div>
+      ) */}
+      {/* <button className="payment-btn" >Pay Now</button> */}
     </div>
   );
 }

@@ -1,0 +1,58 @@
+
+
+
+
+
+.payment-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+.payment-btn{
+    padding: 12px 12px;
+    font-size: 17px;
+    margin-top: 4%;
+    margin-left: 61%;
+    position: absolute;
+    background-color: red;
+}
+
+.payment-btn-cancel{
+    margin: 25% 35%;
+    background-color: red;
+    border: 2px solid black;
+    padding: 13px 30px;
+    opacity: 1
+}
+
+
+.container-1{
+    height: 100vh;
+    width: 100%;
+    border: 2px solid black;
+    position: absolute;
+    background-color: rgba(77, 77, 77, 0.7);
+    /* opacity: 0.7; */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.container-2{
+    border: 2px solid white;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    height: 20pc;
+    margin-top: 13%;
+    position: absolute;
+    width: 50%;
+}
+
+.Radio-btn{
+    border: 2px solid black;
+}
